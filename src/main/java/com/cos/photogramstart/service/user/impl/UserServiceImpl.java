@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
     public User updateUser(Long id, User user) {
         //1 영속화
         User findUser = userRepository.findById(id).orElse(null);
+        System.out.println("findUser.getId() = " + findUser.getId());
         findUser.setName(user.getName());
         findUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         findUser.setBio(user.getBio());
