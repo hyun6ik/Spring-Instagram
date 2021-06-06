@@ -1,7 +1,7 @@
 package com.cos.photogramstart.config.auth;
 
 import com.cos.photogramstart.domain.user.User;
-import com.cos.photogramstart.repository.user.UserRepository;
+import com.cos.photogramstart.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,4 +1,4 @@
-package com.cos.photogramstart.repository.user;
+package com.cos.photogramstart.repository;
 
 import com.cos.photogramstart.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;

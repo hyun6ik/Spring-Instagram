@@ -1,7 +1,7 @@
 package com.cos.photogramstart.service.subscribe.impl;
 
 import com.cos.photogramstart.exception.CustomApiException;
-import com.cos.photogramstart.repository.subscribe.SubScribeRepository;
+import com.cos.photogramstart.repository.SubScribeRepository;
 import com.cos.photogramstart.service.subscribe.SubScribeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
