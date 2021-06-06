@@ -5,4 +5,6 @@ import com.cos.photogramstart.domain.user.User;
 public interface UserService {
 
     User updateUser(Long id, User user);
+
+    User userProfile(Long userId);
 }
