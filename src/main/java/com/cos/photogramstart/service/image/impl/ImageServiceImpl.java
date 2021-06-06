@@ -37,16 +37,16 @@ public class ImageServiceImpl implements ImageService {
         UUID uuid = UUID.randomUUID();
         String imageFileName = uuid + "_" + imageUploadDto.getFile().getOriginalFilename();
 
-        Path imageFilePath = Paths.get(uploadFolder);
+        Path imageFilePath = Paths.get(uploadFolder + imageFileName);
 
-        //통신, I/O -> 예외가 발생할 수 있다.
-        try{
+        // 통신 I/O  -> 예외 발생 가능
+        try {
             Files.write(imageFilePath, imageUploadDto.getFile().getBytes());
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        //image 테이블에 저장
+        // image 테이블에 저장
         Image image = imageUploadDto.toEntity(imageFileName, principalDetails.getUser());
         imageRepository.save(image);
     }
