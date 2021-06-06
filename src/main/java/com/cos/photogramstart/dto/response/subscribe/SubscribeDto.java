@@ -1,4 +1,4 @@
-package com.cos.photogramstart.dto.request.subscribe;
+package com.cos.photogramstart.dto.response.subscribe;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

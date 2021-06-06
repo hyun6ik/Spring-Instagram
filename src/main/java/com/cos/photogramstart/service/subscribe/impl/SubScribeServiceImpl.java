@@ -1,11 +1,14 @@
 package com.cos.photogramstart.service.subscribe.impl;
 
+import com.cos.photogramstart.dto.response.subscribe.SubscribeDto;
 import com.cos.photogramstart.exception.CustomApiException;
 import com.cos.photogramstart.repository.SubScribeRepository;
 import com.cos.photogramstart.service.subscribe.SubScribeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service("subScribeService")
 @RequiredArgsConstructor
@@ -28,5 +31,11 @@ public class SubScribeServiceImpl implements SubScribeService {
     @Override
     public void unSubscribe(Long fromUserId, Long toUserId) {
         subScribeRepository.mUnSubscribe(fromUserId, toUserId);
+    }
+
+
+    @Override
+    public List<SubscribeDto> subscribeList(Long principalId, Long pageUserId) {
+        return null;
     }
 }
