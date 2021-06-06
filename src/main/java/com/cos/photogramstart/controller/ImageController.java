@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.io.IOException;
+
 @Controller
 @RequiredArgsConstructor
 public class ImageController {
@@ -31,10 +33,10 @@ public class ImageController {
     }
 
     @PostMapping("/image")
-    public String imageUpload(ImageUploadDto imageUploadDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public String imageUpload(ImageUploadDto imageUploadDto, @AuthenticationPrincipal PrincipalDetails principalDetails) throws IOException {
 
         imageService.upload(imageUploadDto, principalDetails);
 
-        return "redircet:/user/" + principalDetails.getUser().getId();
+        return "redirect:/user/"+principalDetails.getUser().getId();
     }
 }

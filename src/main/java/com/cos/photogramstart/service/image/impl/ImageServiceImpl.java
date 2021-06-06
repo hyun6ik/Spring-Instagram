@@ -3,6 +3,7 @@ package com.cos.photogramstart.service.image.impl;
 import com.cos.photogramstart.config.auth.PrincipalDetails;
 import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.dto.request.image.ImageUploadDto;
+import com.cos.photogramstart.exception.CustomValidationException;
 import com.cos.photogramstart.repository.ImageRepository;
 import com.cos.photogramstart.service.image.ImageService;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,11 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public void upload(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) throws IOException {
+
+        if(imageUploadDto.getFile().isEmpty()){
+            throw new CustomValidationException("이미지가 첨부되지 않았습니다", null);
+        }
+
         UUID uuid = UUID.randomUUID();
         String imageFileName = uuid + "_" + imageUploadDto.getFile().getOriginalFilename();
 
