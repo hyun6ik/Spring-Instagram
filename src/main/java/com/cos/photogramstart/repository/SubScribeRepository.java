@@ -14,4 +14,10 @@ public interface SubScribeRepository extends JpaRepository<Subscribe,Long> {
     @Modifying
     @Query(value = "DELETE FROM photogram.subscribe where fromUser_id =:fromUserId AND toUser_id =:toUserId", nativeQuery = true)
     void mUnSubscribe(Long fromUserId, Long toUserId);
+
+    @Query(value = "SELECT count(*) FROM photogram.subscribe WHERE fromUser_id = :principalId AND toUser_id = :pageUserId ", nativeQuery = true)
+    int mSubscribeState(Long principalId, Long pageUserId);
+
+    @Query(value = "SELECT count(*) FROM photogram.subscribe WHERE fromUser_id = :pageUserId", nativeQuery = true)
+    int mSubscribeCount(Long pageUserId);
 }

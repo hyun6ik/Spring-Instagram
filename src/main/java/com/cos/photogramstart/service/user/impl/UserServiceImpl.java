@@ -4,6 +4,7 @@ import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.dto.request.user.UserProfileDto;
 import com.cos.photogramstart.exception.CustomException;
 import com.cos.photogramstart.exception.CustomValidationApiException;
+import com.cos.photogramstart.repository.SubScribeRepository;
 import com.cos.photogramstart.repository.UserRepository;
 import com.cos.photogramstart.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final SubScribeRepository subScribeRepository;
 
     @Transactional
     @Override
@@ -39,16 +41,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserProfileDto userProfile(Long pageUserId, Long principalId) {
-        UserProfileDto dto = new UserProfileDto();
         //select * from Image where userId =:userId;
         User user = userRepository.findById(pageUserId).orElseThrow(() -> {
             throw new CustomException("해당 프로필 페이지는 없는 페이지입니다");
         });
 
-        dto.setUser(user);
-        dto.setPageOwnerState(pageUserId == principalId);   //1은 페이지 주인 -1은 주인이 아님님
-        dto.setImageCount(user.getImages().size());
-       return dto;
+        int subscribeState = subScribeRepository.mSubscribeState(principalId, pageUserId);
+        int subscribeCount = subScribeRepository.mSubscribeCount(pageUserId);
+
+        UserProfileDto dto = new UserProfileDto().builder()
+                .user(user)
+                .pageOwnerState(pageUserId == principalId)
+                .imageCount(user.getImages().size())
+                .subscribeCount(subscribeCount)
+                .subscribeState(subscribeState == 1)
+                .build();
+
+        return dto;
     }
 }
 
