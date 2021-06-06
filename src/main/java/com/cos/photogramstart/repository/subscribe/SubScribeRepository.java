@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface SubScribeRepository extends JpaRepository<Subscribe,Long> {
 
     @Modifying
-    @Query(value = "insert INTO photogram.subscribe(fromUser_id, toUser_id) VALUES(:fromUserId, :toUserId)", nativeQuery = true)
+    @Query(value = "insert INTO photogram.subscribe(fromUser_id, toUser_id,createdDate) VALUES(:fromUserId, :toUserId,now())", nativeQuery = true)
     void mSubscribe(Long fromUserId, Long toUserId); //1(변경된 행의 개수가 리턴됨), -1
 
     @Modifying

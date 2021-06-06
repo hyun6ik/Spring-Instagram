@@ -1,6 +1,7 @@
 package com.cos.photogramstart.handler;
 
 import com.cos.photogramstart.dto.response.Result;
+import com.cos.photogramstart.exception.CustomApiException;
 import com.cos.photogramstart.exception.CustomValidationApiException;
 import com.cos.photogramstart.exception.CustomValidationException;
 import com.cos.photogramstart.util.Script;
@@ -22,5 +23,11 @@ public class CustomExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Result<?> validationException(CustomValidationApiException e){
         return new Result<>(-1, e.getMessage(), e.getErrorMap());
+    }
+
+    @ExceptionHandler(CustomApiException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Result<?> validationException(CustomApiException e){
+        return new Result<>(-1, e.getMessage(), null);
     }
 }

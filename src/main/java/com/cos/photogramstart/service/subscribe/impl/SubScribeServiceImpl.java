@@ -1,5 +1,6 @@
 package com.cos.photogramstart.service.subscribe.impl;
 
+import com.cos.photogramstart.exception.CustomApiException;
 import com.cos.photogramstart.repository.subscribe.SubScribeRepository;
 import com.cos.photogramstart.service.subscribe.SubScribeService;
 import lombok.RequiredArgsConstructor;
@@ -16,14 +17,16 @@ public class SubScribeServiceImpl implements SubScribeService {
     @Transactional
     @Override
     public void subscribe(Long fromUserId, Long toUserId ) {
-        subScribeRepository.mSubscribe(fromUserId, toUserId);
-
+        try {
+            subScribeRepository.mSubscribe(fromUserId, toUserId);
+        }catch (Exception e){
+            throw new CustomApiException("이미 구독을 하셨습니다.");
+        }
     }
 
     @Transactional
     @Override
     public void unSubscribe(Long fromUserId, Long toUserId) {
         subScribeRepository.mUnSubscribe(fromUserId, toUserId);
-
     }
 }
