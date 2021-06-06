@@ -38,7 +38,7 @@ public class UserApiController {
         } else {
             User user = userService.updateUser(id, userUpdateRequestDto.toEntity());
             principalDetails.setUser(user);
-            return new Result<>(1, "회원수정완료", user);
+            return new Result<>(1, "회원수정완료", user); //응답시에 user의 모든 Getter가 호출되고 JSON으로 파싱하여 응답한다.
         }
     }
 }

@@ -27,6 +27,7 @@ public class ImageServiceImpl implements ImageService {
     @Value("${file.path}")
     private String uploadFolder;
 
+    @Transactional
     @Override
     public void upload(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) throws IOException {
 

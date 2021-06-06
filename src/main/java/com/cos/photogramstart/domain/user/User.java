@@ -2,6 +2,7 @@ package com.cos.photogramstart.domain.user;
 
 import com.cos.photogramstart.domain.BaseTimeEntity;
 import com.cos.photogramstart.domain.image.Image;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -44,7 +45,9 @@ public class User extends BaseTimeEntity {
     //EAGEr = User를 Select할 때 해당 User id로 등록된 image들을 전부 Join해서 가져와
     @OneToMany(mappedBy = "user", cascade = ALL)
     @Builder.Default
+    @JsonIgnoreProperties({"user"})
     private List<Image> images = new ArrayList<>();
+
 
     //연관관계 메소드
     public void addImage(Image image){
