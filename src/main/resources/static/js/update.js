@@ -17,8 +17,13 @@ function update(userId, event) {
         console.log("update 성공", res);
         location.href = `/user/${userId}`
     }).fail(error => { //HttpStatus 상태 200번대 아닐 때
-        console.log("update 실패", error);
-        alert(JSON.stringify(error.responseJSON.data));
+        if (error.data == null) {
+            console.log("update 실패", error);
+            alert(error.responseJSON.data.name);
+        } else {
+            console.log("update 실패", error);
+            alert(JSON.stringify(error.data.name));
+        }
     });
 
 }
